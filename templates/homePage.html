@@ -23,7 +23,6 @@
     {% endwith %}
 </div>
 
-
 	<div class = 'pane'>
 		<div class = 'header'>
 		<h1>Categories:</h1>
@@ -32,24 +31,23 @@
 		{% for i in category %}
 
 	<div class = 'animalDiv'>
-		<p>{{i.name}}</p>
+		<a href = '{{ url_for('categoryList', category_name = i.name) }}'> {{i.name}} </a>
 	</div>
 
 		{% endfor %}
-
 
 	<div class = 'pane'>
 		<div class = 'header'>
 		<h1>Latest Animals:</h1>
 	</div>
 
-
 		{% for i in items %}
 
 	<div class = 'animalDiv'>
 		<p>
-		<span>{{i.name}}</span>
-		<span>({{i.categories.name}})</span>
+		<a href = '{{ url_for('itemDetail', category_name = i.categories.name , item_name = i.name ) }}'> {{i.name}} </a>
+		&nbsp;
+		<a href = '{{ url_for('categoryList', category_name = i.categories.name) }}'> ({{i.categories.name}}) </a>
 		</p>
 	</div>
 

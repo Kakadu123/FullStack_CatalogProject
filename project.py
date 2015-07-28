@@ -38,7 +38,30 @@ def itemDetail(category_name, item_name):
         'detail.html', item_desc=items.description, item_name=item_name, category_name=category_name)
 
 
+@app.route('/catalog/<string:category_name>/delete',methods=['GET', 'POST'])
+def deleteItem(category_name):
+    itemToDelete = session.query(Items).filter_by(name=category_name).one()
+    if request.method == 'POST':
+        session.delete(itemToDelete)
+        session.commit()
+        return redirect(url_for('homePage'))
+    else:
+        return render_template('deleteItem.html', item=itemToDelete)
 
+
+@app.route('/catalog/<string:category_name>/edit', methods=['GET', 'POST'])
+def editItem(category_name):
+    editedItem = session.query(Items).filter_by(name=category_name).one()
+    if request.method == 'POST':
+        if request.form['name']:
+            editedItem.name = request.form['name']
+        if request.form['description']:
+            editedItem.description = request.form['description']
+        session.add(editedItem)
+        session.commit()
+        return redirect(url_for('homePage'))
+    else:
+        return render_template('editItem.html', item=editedItem)
 
 
 if __name__ == '__main__':
