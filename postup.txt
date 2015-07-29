@@ -1,0 +1,20 @@
+cd /c/Users/Lucia/Desktop/Udacity/Project2/fullstack/vagrant
+cd fullstack/vagrant
+vagrant up
+vagrant ssh
+
+cd /vagrant/catalog
+python database_setup.py
+python lotsofanimals.py
+python project.py
+
+
+=============================================
+http://localhost:8000/
+http://localhost:8000/catalog/reptiles/items
+http://localhost:8000/catalog/reptiles/Snakes/show
+
+pozor nie www ale musi zacinat http
+
+https://github.com/lobrown/Full-Stack-Foundations/tree/master/Lesson-3
+https://github.com/Kakadu123/FullStack_CatalogProject

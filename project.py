@@ -27,7 +27,7 @@ def categoryList(category_name):
     category_one = session.query(Categories).filter_by(name=category_name).one()
     items = session.query(Items).filter_by(category_id=category_one.id).all()
     return render_template(
-        'categories2.html', category=category, items=items, category_name=category_name)
+        'categories.html', category=category, items=items, category_name=category_name)
 
 
 @app.route('/catalog/<category_name>/<item_name>/show')
