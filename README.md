@@ -13,11 +13,11 @@ To run this final project
 
 2. Run database_setup.py to create the database
 
-3. Run lotsofmenus.py to populate the database
+3. Run lotsofanimals.py to populate the database
 
-4. Run finalproject.py and navigate to localhost:5000 in your browser
+4. Run project.py and navigate to localhost:5000 in your browser
 
 ### Application Use
 * Application provides a list of animal categories and animal items
 * Add/Edit/Delete operations are enabled for logged in users only
-* JSON Endpoint for database output through link in the upper rights section
+* JSON Endpoint for database output through a link in the upper rights section
