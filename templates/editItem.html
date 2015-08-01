@@ -1,13 +1,15 @@
+<!--Edit functionality -->
+
 <html>
 	<head>
 		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
 	</head>
 	<body>
-		<div class = 'header'>
+		<div class = 'header center'>
 			<h1>Edit Item</h1>
 		</div>
 
-		<div class = 'pane' id='center'>
+		<div class = 'pane center'>
 			<form action="{{ url_for('editItem', category_name = item.name )}}" method = 'post'>
 
 				<dl>
@@ -15,6 +17,18 @@
 						<dd><input type ='text' size='30' name='name' placeholder = '{{item.name }}'></dd>
 					<dt>Description:</dt>
 						<dd><textarea name = 'description' rows='5' cols='40' placeholder = '{{item.description }}'></textarea></dd>
+
+					<dt>Category:</dt>
+  					{% for c in categories %}
+  						<dd><input  type ='radio' 
+  									name='category' 
+  									value='{{ c.id }}'
+  									{% if c.id==item.category_id %}  
+  										Checked
+  									{% endif %}
+  						>{{ c.name }}</dd>
+		            {% endfor %}		
+
 				</dl>
 
 				<input type='submit' value='Edit'>

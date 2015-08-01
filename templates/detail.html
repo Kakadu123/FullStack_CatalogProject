@@ -1,3 +1,5 @@
+<!--Template for Item Details -->
+
 <html>
 	<head>
 		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
@@ -5,28 +7,17 @@
 
 	<body>
 		
-		<div class = 'header'>
+		<div class = 'header center'>
 			<h1>Animal Catalog App</h1>
 		</div>
-
-
-		<div class = 'flash'>
-				{% with messages = get_flashed_messages() %}
-			      {% if messages %}      
-			        <ul>
-			        {% for message in messages %}
-			            <li> <strong> {{ message }} </strong> </li>
-			        {% endfor %}
-			        </ul>
-			        {% endif %}
-			    {% endwith %}
-		</div>
 		
-		<div class = 'pane' id='center'>
+		<div class = 'pane center'>
 			<div class = 'header'>
 				<h2><strong> {{ item_name }} </strong></h2>
-				<div class='descDiv'><p>{{ item_desc }}</p></div>
+				
 			</div>
+		
+			<div class='descDiv'><p>{{ item_desc }}</p></div>
 		
 			<div class = "editdeletepane">
 				<a href = '{{ url_for('homePage') }}'> Home </a>

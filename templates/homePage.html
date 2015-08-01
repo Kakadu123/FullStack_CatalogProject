@@ -1,14 +1,20 @@
 <html>
 	<head>
 		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
 	</head>
 	
-	<body>
-		
+	<body>	
+		<!--Header including JSON button and logIn/logOut button based on authentication state  -->
 		<div class = 'header'>
 				<h1>Animal Catalog App</h1>
+				<a id="logout"   class='button {{ statusOut }}'  href="/gdisconnect" >Log Out</a>
+				<a id="login"    class='button {{ statusIn }}'  href="/login" >Log In</a>
+				<a id="json"    class='button'  href="/catalog.JSON" >JSON</a>
 		</div>
-
+	    
+	    <!--Div to display flash messages -->
 		<div class = 'flash'>
 			{% with messages = get_flashed_messages() %}
 		      {% if messages %}      
@@ -19,10 +25,9 @@
 		        </ul>
 		        {% endif %}
 		    {% endwith %}
-			</div>
-
 		</div>	
 
+		<!--Main Div container -->
 		<div class='container'>
 
 			<div class = 'pane'>
@@ -42,10 +47,16 @@
 
 			</div>	
 
+			<div class='pane'>
+				<a href = '{{url_for('newItem') }}'>Create New Animal</a>
+			</div>
+
+			<!--Div to display animal items -->
 			<div class = 'pane'>
 				<div class = 'header'>
-				<h1>Latest Animals:</h1>
+					<h1>Animals ({{ count }}):</h1>
 				</div>
+
 
 				{% for i in items %}
 
@@ -53,7 +64,7 @@
 					<p>
 						<a href = '{{ url_for('itemDetail', category_name = i.categories.name , item_name = i.name ) }}'> {{i.name}} </a>
 						&nbsp;
-						<a href = '{{ url_for('categoryList', category_name = i.categories.name) }}'> ({{i.categories.name}}) </a>
+						<a class='categoryLink' href = '{{ url_for('categoryList', category_name = i.categories.name) }}'> ({{i.categories.name}}) </a>
 					</p>
 				</div>
 

@@ -1,14 +1,16 @@
+<!--Delete functionality -->
+
 <html>
 	<head>
 		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
 	</head>
 	
 	<body>
-		<div class = 'header'>
+		<div class = 'header center'>
 			<h1>Delete Warning</h1>
 		</div>
 
-		<div class = 'pane warning' id='center'>
+		<div class = 'pane warning center'>
 			
 			<form action="{{ url_for('deleteItem', category_name = item.name)}}" method = 'post'>
 				

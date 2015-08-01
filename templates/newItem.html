@@ -1,0 +1,40 @@
+<!--Add functionality -->
+
+<html>
+	<head>
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+	<body>
+		<div class = 'header'>
+			<h1>Add Item</h1>
+		</div>
+
+		<div class = 'pane' id='center'>
+			<form action="{{ url_for('newItem') }}" method = 'post'>
+				<dl>
+					<dt>Name:</dt>
+					<dd><input type ='text' size='30' name='name' required></dd>
+				    <dt>Description:</dt>
+				    <dd><textarea name = 'description' rows='5' cols='40' required></textarea></dd>
+				    <dt>Category:</dt>
+  					{% for c in categories %}
+  						<dd><input  type ='radio' 
+  									name='category' 
+  									value='{{ c.id }}'
+  									{% if c.id==1 %}  
+  										Checked
+  									{% endif %}
+  						>{{ c.name }}</dd>
+		            {% endfor %}
+				</dl>
+
+			<input type='submit' value='Create'>
+			<a href = '{{url_for('homePage')}}'>Cancel</a>
+			</form>
+		</div>
+	</body>
+
+
+
+
+</html>

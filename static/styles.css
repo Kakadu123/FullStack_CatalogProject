@@ -1,3 +1,4 @@
+/* styling of html elements */
 body            { font-family: sans-serif; background-image: url('img3.jpg'); background-color: #333333}
 h1, h2, h3, h4       { color: #FFFFFF; }
 h1, h2          { font-family: 'Georgia', serif; margin: 0; }
@@ -6,17 +7,23 @@ h2              { font-size: 1.2em; }
 p, dd, dt               { color: #CCCCCC;}
 form * { margin: 7px; }
 a {text-decoration: none; color:#FFFFCC; font-size: .75em; margin-left: 15px; }
-
+a.button {   -webkit-appearance: button; -moz-appearance: button; appearance: button; text-decoration: none; color: initial; background-color:  #E6E6E6; padding: 6px; width: 50px; float: right; margin-right: 5%; }
 .container {border: 2px solid; border-color: #999999;}
 .pane {width:30%; float: left; border: 2px solid;
-    border-radius: 25px; padding: 5px; margin: 30px 8%; border-color: #999999; background-color: #333333 }
-#center {margin: 30px 34%;}
-.header         {left:50%; text-align: center;}
+    border-radius: 25px; padding: 5px; margin: 30px 8%; border-color: #999999; background-color: #848484 }
+.center {margin: 30px 34%;}
+.header         {left:50%; text-align: center; height: 40px;}
 .name {width:50%;display: inline-block; float: left;}
 .description {}
 .price {text-align: right; width:50%; float: right; }
-.editdeletepane{}
 .flash          { background: #cee5F5; }
 .error          { background: #f0d6d6; padding: 0.5em; }
 .descDiv { text-align: justify; padding: 10px;}
- 
+.none { display: none;}
+.categoryLink { font-style: italic; }
+.header h1 { float: left; margin-left: 10%; }
+.centered, #signInButton { text-align: center; }
+#welcomeObj { text-align: center; color: #CCC; }
+#welcomeObj img { padding-top: 15px; }
+#login, #logout { background-color:  #F78181}
+
