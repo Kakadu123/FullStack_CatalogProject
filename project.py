@@ -94,8 +94,9 @@ def gconnect():
         response.headers['Content-Type'] = 'application/json'
         return response
 
-    # Store the access token in the session for later use.
-    login_session['credentials'] = credentials
+    # Store the access token in the session for later use
+    #login_session['credentials'] = credentials
+    login_session['credentials'] = credentials.to_json()
     login_session['gplus_id'] = gplus_id
 
     # Get user info
@@ -132,6 +133,7 @@ def gdisconnect():
         response.headers['Content-Type'] = 'application/json'
         return response
     access_token = credentials.access_token
+    # access_token = credentials
     url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % access_token
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
@@ -170,7 +172,7 @@ def homePage():
 
 
 # View rendering categories page
-@app.route('/catalog/<category_name>/items')
+@app.route('/catalog/<string:category_name>/items')
 def categoryList(category_name):
     category = session.query(Categories).all()
     category_one = session.query(Categories).filter_by(name=category_name).one()
@@ -188,20 +190,19 @@ def categoryList(category_name):
 
 
 # View rendering detail of an item
-@app.route('/catalog/<category_name>/<item_name>/show')
-def itemDetail(category_name, item_name):
+@app.route('/catalog/<string:category_name>/<int:item_id>/show')
+def itemDetail(category_name, item_id):
     category = session.query(Categories).filter_by(name=category_name).one()
-    items = session.query(Items).filter_by(name=item_name).one()
-    return render_template('detail.html', item_desc=items.description,
-                           item_name=item_name, category_name=category_name)
+    item = session.query(Items).filter_by(id=item_id).one()
+    return render_template('detail.html', item=item, category_name=category_name)
 
 
 # delete functionality
-@app.route('/catalog/<string:category_name>/delete', methods=['GET', 'POST'])
-def deleteItem(category_name):
+@app.route('/catalog/<int:item_id>/delete', methods=['GET', 'POST'])
+def deleteItem(item_id):
     if 'username' not in login_session:
         return redirect('/login')
-    itemToDelete = session.query(Items).filter_by(name=category_name).one()
+    itemToDelete = session.query(Items).filter_by(id=item_id).one()
     if request.method == 'POST':
         session.delete(itemToDelete)
         session.commit()
@@ -212,11 +213,11 @@ def deleteItem(category_name):
 
 
 # edit functionality
-@app.route('/catalog/<string:category_name>/edit', methods=['GET', 'POST'])
-def editItem(category_name):
+@app.route('/catalog/<int:item_id>/edit', methods=['GET', 'POST'])
+def editItem(item_id):
     if 'username' not in login_session:
         return redirect('/login')
-    editedItem = session.query(Items).filter_by(name=category_name).one()
+    editedItem = session.query(Items).filter_by(id=item_id).one()
     if request.method == 'POST':
         if request.form['name']:
             editedItem.name = request.form['name']

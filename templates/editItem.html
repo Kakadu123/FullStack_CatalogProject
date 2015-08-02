@@ -10,13 +10,13 @@
 		</div>
 
 		<div class = 'pane center'>
-			<form action="{{ url_for('editItem', category_name = item.name )}}" method = 'post'>
+			<form action="{{ url_for('editItem', item_id = item.id )}}" method = 'post'>
 
 				<dl>
 					<dt>Name:</dt>
-						<dd><input type ='text' size='30' name='name' placeholder = '{{item.name }}'></dd>
+						<dd><input type ='text' size='30' name='name' value = '{{item.name}}'></dd>
 					<dt>Description:</dt>
-						<dd><textarea name = 'description' rows='5' cols='40' placeholder = '{{item.description }}'></textarea></dd>
+						<dd><textarea name = 'description' rows='5' cols='40'>{{item.description}}</textarea></dd>
 
 					<dt>Category:</dt>
   					{% for c in categories %}

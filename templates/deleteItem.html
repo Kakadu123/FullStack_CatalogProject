@@ -12,7 +12,7 @@
 
 		<div class = 'pane warning center'>
 			
-			<form action="{{ url_for('deleteItem', category_name = item.name)}}" method = 'post'>
+			<form action="{{ url_for('deleteItem', item_id = item.id)}}" method = 'post'>
 				
 				<p> Are you sure you want to delete {{item.name}}? </p>
 				<input type='submit', value = 'Delete'>
