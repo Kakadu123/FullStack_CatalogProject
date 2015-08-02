@@ -1,5 +1,5 @@
 # Import of resources
-from flask import Flask, render_template, request, redirect, jsonify, url_for, flash
+from flask import Flask, render_template, request, redirect, jsonify, url_for, g, flash
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Categories, Items
@@ -12,6 +12,7 @@ import httplib2
 import json
 from flask import make_response
 import requests
+from functools import wraps
 
 app = Flask(__name__)
 
@@ -195,11 +196,20 @@ def itemDetail(category_name, item_id):
     return render_template('detail.html', item=item, category_name=category_name)
 
 
+# Decorator login function
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'username' not in login_session:
+            return redirect(url_for('showLogin', next=request.url))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
 # delete functionality
 @app.route('/catalog/<int:item_id>/delete', methods=['GET', 'POST'])
+@login_required
 def deleteItem(item_id):
-    if 'username' not in login_session:
-        return redirect('/login')
     itemToDelete = session.query(Items).filter_by(id=item_id).one()
     if request.method == 'POST':
         session.delete(itemToDelete)
@@ -212,9 +222,8 @@ def deleteItem(item_id):
 
 # edit functionality
 @app.route('/catalog/<int:item_id>/edit', methods=['GET', 'POST'])
+@login_required
 def editItem(item_id):
-    if 'username' not in login_session:
-        return redirect('/login')
     editedItem = session.query(Items).filter_by(id=item_id).one()
     if request.method == 'POST':
         if request.form['name']:
@@ -235,9 +244,8 @@ def editItem(item_id):
 
 # add new item functionality
 @app.route('/catalog/new', methods=['GET', 'POST'])
+@login_required
 def newItem():
-    if 'username' not in login_session:
-        return redirect('/login')
     if request.method == 'POST':
         newItem = Items(name=request.form['name'],
                         description=request.form['description'],

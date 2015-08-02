@@ -52,7 +52,7 @@
 
 				<div class = 'animalDiv'>
 					<p>
-						<a href = '{{ url_for('itemDetail', category_name = i.categories.name , item_name = i.name ) }}'> {{i.name}} </a>
+						<a href = '{{ url_for('itemDetail', category_name = i.categories.name , item_id = i.id ) }}'> {{i.name}} </a>
 						&nbsp;
 						<a class='categoryLink' href = '{{ url_for('categoryList', category_name = i.categories.name) }}'> ({{i.categories.name}}) </a>
 					</p>
