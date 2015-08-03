@@ -21,4 +21,5 @@ To run this final project
 * Application provides a list of animal categories and animal items
 * Add/Edit/Delete operations are enabled for logged in users only
 * JSON Endpoint for database output through a link in the upper rights section
-* JSON provides master detail view of data
+* JSON provides master-detail view of database
+* master table = Categories, detail table = Items
